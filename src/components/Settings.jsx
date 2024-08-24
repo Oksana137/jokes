@@ -13,10 +13,10 @@ const Settings = ({ settings, setSettings }) => {
 
       if (!newSettings.single && !newSettings.twopart) {
         setIsError(true);
-        return prev;
+      } else {
+        setIsError(false);
       }
-
-      setIsError(false);
+      
       return newSettings;
     });
   };
