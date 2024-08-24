@@ -15,9 +15,9 @@ const Settings = ({ settings, setSettings }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col items-center gap-4 min-h-32 w-1/2 p-8 bg-white rounded-lg border-2 border-slate-400"
+      className="min-h-32 p-8 bg-white rounded-lg border-2 border-slate-400"
     >
-      <fieldset className="flex justify-around border border-slate-400 rounded-lg p-4">
+      <fieldset className="flex justify-center gap-8 border border-slate-400 rounded-lg p-4">
         <legend>Select at least one joke type:</legend>
         <div className="flex gap-4">
           <input

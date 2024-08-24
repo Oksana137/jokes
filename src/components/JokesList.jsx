@@ -46,7 +46,7 @@ const JokesList = ({ settings }) => {
   }, [settings]);
 
   return (
-    <div className="flex flex-col items-center w-1/2 gap-8">
+    <div className="flex flex-col gap-8">
       {jokesList && jokesList.map((joke) => <Joke key={joke.id} joke={joke} />)}
     </div>
   );

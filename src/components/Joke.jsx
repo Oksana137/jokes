@@ -5,7 +5,7 @@ const Joke = ({ joke }) => {
   const twoPartJoke = joke.type === "twopart";
 
   return (
-    <div className="flex flex-col items-center w-full gap-4 min-h-32 p-8 bg-white rounded-lg border-2 border-slate-400">
+    <div className="flex flex-col items-center gap-4 min-h-32 p-8 bg-white rounded-lg border-2 border-slate-400">
       <p>{twoPartJoke ? joke.setup : joke.joke}</p>
       {twoPartJoke && showDelivery && <p>{joke.delivery}</p>}
       {twoPartJoke && (
