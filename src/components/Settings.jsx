@@ -1,23 +1,33 @@
+import { useState } from "react";
+
 const Settings = ({ settings, setSettings }) => {
+  const [isError, setIsError] = useState(false);
+
   const handleChange = (e) => {
     const { name, checked } = e.target;
-    setSettings((prev) => ({
-      ...prev,
-      [name]: checked,
-    }));
-  };
+    setSettings((prev) => {
+      const newSettings = {
+        ...prev,
+        [name]: checked,
+      };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setShowJokes(true);
+      if (!newSettings.single && !newSettings.twopart) {
+        setIsError(true);
+        return prev;
+      }
+
+      setIsError(false);
+      return newSettings;
+    });
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="min-h-32 p-8 bg-white rounded-lg border-2 border-slate-400"
-    >
-      <fieldset className="flex justify-center gap-8 border border-slate-400 rounded-lg p-4">
+    <form className="min-h-32 p-8 bg-white rounded-lg border-2 border-slate-400">
+      <fieldset
+        className={`flex justify-center gap-8 p-4 border rounded-lg ${
+          isError ? "border-red-500" : "border-slate-400"
+        }`}
+      >
         <legend>Select at least one joke type:</legend>
         <div className="flex gap-4">
           <input

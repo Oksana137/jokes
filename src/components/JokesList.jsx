@@ -12,14 +12,36 @@ const JokesList = ({ settings }) => {
         return false;
       }
 
-      let path =
-        "https://v2.jokeapi.dev/joke/Programming,Miscellaneous?lang=de&blacklistFlags=nsfw,religious,political,racist,sexist,explicit&amount=10";
-
+      let options = {
+        lang: "de",
+        blacklistFlags: [
+          "nsfw",
+          "religious",
+          "political",
+          "racist",
+          "sexist",
+          "explicit",
+        ],
+        amount: 10,
+        type: 'null'
+      };
+      
       if (settings.single && !settings.twopart) {
-        path += "&type=single";
+        options.type = "single";
       } else if (!settings.single && settings.twopart) {
-        path += "&type=twopart";
+        options.type = "twopart";
       }
+
+      let params = new URLSearchParams();
+      params.append("lang", options.lang);
+      params.append("blacklistFlags", options.blacklistFlags.join(","));
+      params.append("amount", options.amount);
+      params.append("type", options.type);
+      let queryString = params.toString();
+
+      let path = `https://v2.jokeapi.dev/joke/Programming,Miscellaneous?${queryString}`;
+
+      console.log(path);
 
       return path;
     };
@@ -27,7 +49,7 @@ const JokesList = ({ settings }) => {
     const fetchJokes = async () => {
       try {
         const path = getPath();
-        if (!path) throw new Error("Select at least one joke type");
+        if (!path) throw new Error("Invalid Settings Detected");
 
         const response = await fetch(path);
         if (!response.ok) throw new Error("Fetch error");
