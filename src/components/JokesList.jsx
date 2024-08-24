@@ -25,7 +25,7 @@ const JokesList = ({ settings }) => {
         amount: 10,
         type: 'null'
       };
-      
+
       if (settings.single && !settings.twopart) {
         options.type = "single";
       } else if (!settings.single && settings.twopart) {
@@ -40,9 +40,6 @@ const JokesList = ({ settings }) => {
       let queryString = params.toString();
 
       let path = `https://v2.jokeapi.dev/joke/Programming,Miscellaneous?${queryString}`;
-
-      console.log(path);
-
       return path;
     };
 
